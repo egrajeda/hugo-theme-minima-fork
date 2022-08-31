@@ -3,17 +3,23 @@
 		<h2 class="mt-8 mb-1">{{ .Site.Params.iam }} {{ .Site.Author.name }}</h2>
 		<p class="my-0">{{ .Site.Author.slogon }}</p>
 		<p class="my-3 home-intro">{{ .Site.Author.description | markdownify | safeHTML }}</p>
-		{{ if eq .Paginator.PageNumber 1 }}
-		<h3 class="my-6">{{ .Site.Params.recent }}</h3>
-		{{ else }}
-		<h3 class="my-6">{{ .Site.Params.older }}</h3>
-		{{ end }}
+		<h3 class="my-6">
+			Latest Updates
+			<span class="home-header-links">(<a href="/update">see all</a>)</span>
+		</h3>
 		<div>
-			{{ $paginator := .Paginate (where .Site.RegularPages "Kind" "page") }}
-			{{ range $paginator.Pages }}
+			{{ range first 3 (where .Site.RegularPages "Type" "update") }}
 			{{ partial "list.html" . }}
 			{{ end }}
-			{{ partial "paginator.html" . }}
+		</div>
+		<h3 class="my-6">
+			{{ .Site.Params.recent }}
+			<span class="home-header-links">(<a href="/note">see all</a>)</span>
+		</h3>
+		<div>
+			{{ range first 10 (where .Site.RegularPages "Type" "!=" "update") }}
+			{{ partial "list.html" . }}
+			{{ end }}
 		</div>
 		{{ if .Site.Params.friends.feeds }}
 		<h3 class="my-6">{{ .Site.Params.friends.title }}</h3>

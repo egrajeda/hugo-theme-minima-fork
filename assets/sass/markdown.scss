@@ -1,8 +1,18 @@
-.md blockquote {
-  background-color: rgba(148, 148, 149, 0.08) ;
-  padding: 1px 1rem;
-  border-left: 4px solid var(--pm);
-  font-style: italic;
+.md blockquote,
+.alert {
+  background-color: #f0f6ff;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid #005a9c;
+  line-height: 1.6; // Sometimes <p> elements are not rendered inside by Hugo
+}
+
+.alert {
+  background-color: #fcfaee;
+  border-color: #e0cb52;
+}
+
+.alert pre {
+  background-color: inherit;
 }
 
 .md table {
@@ -48,21 +58,40 @@
 
 .md li {
   margin-bottom: .5rem;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 .md ol,
 .md ul,
 .md img,
 .md blockquote,
-.md .highlight {
+.md .highlight,
+.alert {
   margin: .75rem 0;
 }
 
-.md blockquote p {
+.md ol,
+.md ul {
+  padding-left: 1.2rem;
+}
+
+.md ul {
+  list-style-type: disc;
+}
+
+.md blockquote p,
+.alert p {
   margin: .5rem 0;
-  line-height: 1.5;
-  font-size: .9rem;
+}
+
+.md blockquote *:first-child,
+.alert *:first-child {
+  margin-top: 0;
+}
+
+.md blockquote *:last-child,
+.alert *:last-child {
+  margin-bottom: 0;
 }
 
 .md hr {
@@ -74,11 +103,14 @@
   font-size: .9rem;
 }
 
+.md .footnotes p {
+  margin: 0;
+}
+
 .md p sup {
   margin-left: 4px;
 }
 
 .md a {
-  font-style: italic;
   text-decoration: underline;
 }

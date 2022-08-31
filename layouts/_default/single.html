@@ -6,7 +6,7 @@
 <div class="mb-3 text-xs flex justify-between sm:flex-col">
 	<div>
 	{{ if .Site.Params.displayDate }}
-		Posted at &mdash; {{ dateFormat .Site.Params.timeformat .Date }}
+		Posted {{ dateFormat .Site.Params.timeformat .Date }}
 	{{ end }}
 		{{ if .Draft }}
 		<span class="ml-3 minima-tag">

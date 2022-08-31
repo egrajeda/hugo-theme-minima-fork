@@ -2,23 +2,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   {{ template "_internal/opengraph.html" . }}
-  {{ template "_internal/twitter_cards.html" . }}
-  {{ template "_internal/google_analytics.html" . }}
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#262d33">
   <title>
     {{ if .IsHome }}
     {{ .Site.Title }} {{ if .Site.Params.subtitle }} - {{ .Site.Params.subtitle }} {{ end }}
     {{ else }}
-    {{ .Site.Title }} - {{ .Title }}
+    {{ .Title }} - {{ .Site.Title }}
     {{ end }}
   </title>
-  {{ $favicon := "favicon.ico" }}
-  <link rel="shortcut icon" href="{{ $favicon | relURL }}" type="image/x-icon" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700&display=swap"
-    rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%221em%22 font-size=%2290%22>🐻</text></svg>">
   {{ $hash := now.Unix }}
   {{ $options := (dict "targetPath" (printf `minima.%d.css` $hash) "outputStyle" "compressed" "enableSourceMap" true) }}
   {{ $style := resources.Get "sass/main.scss" | resources.ToCSS $options }}
@@ -27,27 +20,6 @@
   {{ $options = (dict "targetPath" (printf `minima.%d.js` $hash) "minify" true) }}
   {{ $js := resources.Get "js/main.js" | js.Build $options | resources.ExecuteAsTemplate (printf `minima.%d.js` $hash) . }}
   <script defer type="text/javascript" src="{{ $js.RelPermalink }}"></script>
+
+  <link rel="alternate" type="application/rss+xml" href="/feed.xml"/>
 </head>
-<script>
-  // We will default to system theme color if no choice was made.
-  let theme_2b_used = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-
-  try {
-    if (!('theme' in localStorage)) {
-      const default_theme = '{{ .Site.Params.defaultTheme }}';
-      
-      // For the first time entering this site, use the theme picked by the author.
-      if (default_theme === 'dark' || default_theme === 'light') {
-        theme_2b_used = default_theme;
-      }
-
-      // Remember the choice.
-      localStorage.theme = theme_2b_used;
-    }
-    
-    document.querySelector('html').classList.add(localStorage.theme);
-  } catch (e) {
-    console.error(e);
-  }
-</script>
-
