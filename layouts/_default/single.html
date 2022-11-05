@@ -14,13 +14,6 @@
 		</span>
 		{{ end }}
 	</div>
-	{{ if .Params.tags }}
-	<div class="sm:mt-4">
-		{{ range .Params.tags }}
-		<a class="not-first:ml-3" href="/tags/{{ . }}">#{{ . }}</a>
-		{{ end }}
-	</div>
-	{{ end }}
 </div>
 <main>
 	<p>{{ .Description | markdownify | safeHTML }}</p>
