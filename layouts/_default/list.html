@@ -6,7 +6,7 @@
 	<h2 class="my-8">{{ .Title }}</h2>
 	{{ end }}
 	<div class="mt-8">
-		{{ range .Data.Pages }}
+		{{ range .Data.Pages.ByLastmod.Reverse }}
 		{{ partial "list.html" . }}
 		{{ end }}
 	</div>

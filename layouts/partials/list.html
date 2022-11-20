@@ -5,6 +5,6 @@
 <a class="" href="{{ .RelPermalink }}">{{ .Title }}</a>
 {{ end }}
 {{ if .Site.Params.displayDate }}
-  <div class="sm:mb-1 sm:text-xs">{{ dateFormat .Site.Params.timeformat .Date }}</div>
+  <div class="sm:mb-1 sm:text-xs">{{ dateFormat .Site.Params.timeformat .Lastmod }}</div>
 {{ end }}
 </div>
